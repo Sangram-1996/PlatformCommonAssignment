@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.dto.StudentDTO;
-import com.masai.dto.StudentValidationDTO;
 import com.masai.entity.Course;
 import com.masai.entity.Student;
 import com.masai.exception.CourseException;
@@ -32,6 +31,8 @@ public class StudentController {
 	@Autowired
 	private CourseService courseService;
 	
+	//STUDENT UPDATE SELF DETAILS-->
+	
 	@PutMapping("/updatestudent")
 	public ResponseEntity<Student> updateStudentHandler(@RequestBody StudentDTO studentDTO) throws StudentException{
 		Student updatedStudent=  studentService.updateDetails(studentDTO);
@@ -40,7 +41,7 @@ public class StudentController {
 			
 	}
 	
-	
+	//STUDENT GET COURSE LIST ASSIGNED TO HIM/HER-->
 	
 	@GetMapping("/courses")
 	public ResponseEntity<List<Course>> coursesAssignedToStudentHandler(@RequestHeader ("id") Integer id, @RequestHeader ("dob") String dob) throws StudentException, CourseException{
@@ -53,6 +54,7 @@ public class StudentController {
 			
 	}
 	
+	//STUDENT LEAVE A COURSE-->
 	
 	@DeleteMapping("/removecourse/{courseId}")
 	public ResponseEntity<List<Course>> removecoursfromAssignedStudentHandler(@PathVariable Integer courseId,@RequestHeader ("id") Integer id, @RequestHeader ("dob") String dob) throws StudentException, CourseException{

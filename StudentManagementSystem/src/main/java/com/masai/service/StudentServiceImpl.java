@@ -90,22 +90,11 @@ public class StudentServiceImpl implements StudentService {
 			
 			response.put("students", studentlist);
 			response.put("currentPage", pageStudent.getNumber());
-			response.put("totalIteam", pageStudent.getTotalElements());
+			response.put("totalItem", pageStudent.getTotalElements());
 			response.put("totalPages", pageStudent.getTotalPages());
 			
 			
 			return response;
-			
-			
-			
-			
-//			List<Student> studentlist= studentRepo.findByName(name);
-			
-//			if(studentlist.isEmpty()) {
-//				throw new StudentException("No student found with this name");
-//			}
-				
-//		return studentlist;
 	}
 
 	@Override

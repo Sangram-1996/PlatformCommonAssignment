@@ -2,8 +2,6 @@ package com.masai.service;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import com.masai.dto.StudentValidationDTO;
 import com.masai.entity.Course;
 import com.masai.exception.CourseException;
 import com.masai.exception.LogInException;

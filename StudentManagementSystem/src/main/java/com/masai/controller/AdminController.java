@@ -26,7 +26,6 @@ import com.masai.exception.CourseException;
 import com.masai.exception.LogInException;
 import com.masai.exception.SignUpException;
 import com.masai.exception.StudentException;
-import com.masai.repo.AddressRepo;
 import com.masai.service.AdminLoginService;
 import com.masai.service.AdminSignupService;
 import com.masai.service.CourseService;
@@ -46,10 +45,7 @@ public class AdminController {
 	@Autowired
 	private CourseService courseService;
 	
-	@Autowired
-	private AddressRepo addressRepo;
-	
-	
+	//ADMIN SIGNUP-->
 	
 	@PostMapping("/register")
 	public ResponseEntity<AdminSignupData> registerAdminHandler(@Valid @RequestBody AdminSignupData adminSignupData) throws SignUpException{
@@ -59,6 +55,8 @@ public class AdminController {
 			
 	}
 	
+	//ADMIN LOGIN-->
+	
 	@PostMapping("/login")
 	public ResponseEntity<CurrentUserSession> loginAdminHandler(@Valid @RequestBody AdminLoginDTO adminLoginDTO) throws LogInException{
 		CurrentUserSession currentUserSession= adminLoginService.loginAdmin(adminLoginDTO);
@@ -67,6 +65,7 @@ public class AdminController {
 			
 	}
 	
+	//ADMIN LOGOUT-->
 	
 	@DeleteMapping("/logout")
 	public ResponseEntity<String> logoutAdminHandler(@RequestHeader ("key") String key) throws LogInException{
@@ -76,7 +75,9 @@ public class AdminController {
 			
 	}
 	
-	@PostMapping("/registerstudent")
+	//ADMIN ADMIT A STUDENT-->
+	
+	@PostMapping("/admitstudent")
 	public ResponseEntity<Student> registerStudentHandler(@Valid @RequestBody Student student, @RequestHeader("key") String key) throws StudentException, LogInException{
 		Student registeredStudent= studentService.addStudent(student, key);
 		
@@ -84,8 +85,10 @@ public class AdminController {
 			
 	}
 	
-
-	@PostMapping("/registercourse")
+      //ADMIN UPLOAD COURSE-->
+	
+	
+	@PostMapping("/uploadcourse")
 	public ResponseEntity<Course> registerCourseHandler(@Valid @RequestBody Course course, @RequestHeader("key") String key) throws LogInException, CourseException{
 		Course registeredCourse= courseService.addCourse(course, key);
 		
@@ -93,6 +96,7 @@ public class AdminController {
 			
 	}
 	
+	//ADMIN ASSIGN COURSE TO STUDENT-->
 	
 	@PostMapping("/addcoursetostudent/{cId}/{sId}")
 	public ResponseEntity<List<Course>> addCourseToStudentHandler(@PathVariable Integer cId,@PathVariable Integer sId, @RequestHeader("key") String key) throws StudentException, LogInException, CourseException{
@@ -103,6 +107,8 @@ public class AdminController {
 	}
 	
 	
+	//ADMIN SEARCH STUDENTS BY NAME-->
+	
 	@GetMapping("/studentsbyname/{name}")
 	public ResponseEntity<Map<String, Object>> studentsByNameHandler(@PathVariable String name, @RequestHeader("key") String key,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer size) throws StudentException, LogInException{
 		Map<String, Object> studentPage= studentService.getStudentsByName(page, size, name, key);
@@ -112,7 +118,7 @@ public class AdminController {
 	}
 	
 	
-	
+	//ADMIN SEARCH STUDENTS BY COURSENAME
 	
 	@GetMapping("/studentsbycourse/{Cname}")
 	public ResponseEntity<List<Student>> studentsByCourseHandler(@PathVariable String Cname, @RequestHeader("key") String key) throws StudentException, LogInException, CourseException{

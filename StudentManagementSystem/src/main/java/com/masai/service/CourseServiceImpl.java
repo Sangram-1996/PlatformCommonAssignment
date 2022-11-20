@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.masai.dto.StudentValidationDTO;
 import com.masai.entity.Course;
 import com.masai.entity.CurrentUserSession;
 import com.masai.entity.Student;

@@ -26,13 +26,17 @@ public class Course {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer courseId;
-
+    
+	@NotNull
 	private String courseName;
 	
+	@NotNull
 	private String description;
 	
+	@NotNull
 	private String courseType;
 	
+	@NotNull
 	private Double duration;
 	
 	@ElementCollection
